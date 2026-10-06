@@ -93,13 +93,14 @@ effort_word() {
 # Fixed-width "NNN%" (or " --%").
 pct_text() { [ -z "$1" ] && printf ' --%%' || printf '%3d%%' "$1"; }
 
-# Fixed-width (5 chars) time until reset: "4h59m" / "6d23h" / "   --".
+# Fixed-width (5 chars) time until reset: "4h59m" / "  16h" / "6d23h" / "   --".
 until_text() {
   local t=$1 now d
   [ -z "$t" ] && { printf '   --'; return; }
   now=$(date +%s); d=$(( t - now ))
   [ "$d" -le 0 ] && { printf '   --'; return; }
   if [ "$d" -ge 86400 ]; then printf '%dd%02dh' $((d/86400)) $((d%86400/3600))
+  elif [ "$d" -ge 36000 ]; then printf '%dh' $((d/3600))
   else printf '%dh%02dm' $((d/3600)) $((d%3600/60)); fi | awk '{printf "%5s", $0}'
 }
 
