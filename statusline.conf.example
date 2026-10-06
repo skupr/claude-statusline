@@ -1,0 +1,13 @@
+# Overrides for ~/.claude/statusline.sh (bash syntax). Delete a line to use the default.
+# Thresholds are "yellow orange red"; below the first is green.
+
+# Context window: the worse of the % level and the token level wins.
+CTX_THRESHOLDS="50 65 80"                    # % of the window
+CTX_TOKEN_THRESHOLDS="150000 250000 400000"  # absolute tokens (only bites on 1M windows)
+
+# 5h / 7d bars: "pace" (projected usage at reset) or "usage" (plain %)
+LIMIT_COLOR_MODE=pace
+USAGE_THRESHOLDS="50 75 90"    # usage mode: % used
+PACE_THRESHOLDS="100 120 150"  # pace mode: projected % used by reset
+PACE_MIN_USED=20               # pace mode: green below this % used (too early to judge)
+PACE_HARD_RED=90               # pace mode: red at/above this % used regardless of pace
